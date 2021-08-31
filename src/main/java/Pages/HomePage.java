@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,18 @@ public class HomePage extends BasePage {
     List<WebElement> CustomerDetails;
     @FindBy(xpath = "//nav[@id='header']")
     WebElement OrderSummary;
+    @FindBy(xpath = "//input[@value='Budi']")
+    WebElement Name;
+    @FindBy(xpath = "//input[@value='budi@utomo.com']")
+    WebElement Email;
+    @FindBy(xpath = "//input[@value='081808466410']")
+    WebElement phone;
+    @FindBy(xpath = "//input[@value='Jakarta']")
+    WebElement city;
+    @FindBy(xpath = "//textarea[normalize-space()='MidPlaza 2, 4th Floor Jl.Jend.Sudirman Kav.10-11']")
+    WebElement address;
+    @FindBy(xpath = "//input[@value='10220']")
+    WebElement Postalcode;
 
     public boolean verifyPrice() {
         boolean flag = false;
@@ -43,18 +56,18 @@ public class HomePage extends BasePage {
     }
 
     public void clickBuyNow() {
+        wait(BuyNow);
         BuyNow.click();
-        Utils.holdExecutionForSeconds(2);
+        wait(Checkout);
     }
 
     public boolean verifyTotal() {
-        boolean flag = false;
-        if (Total.isDisplayed()) {
-            flag = true;
-        } else {
-            flag = false;
-        }
+        boolean flag = wait(Total).isDisplayed();
         return flag;
+    }
+
+    public void getTotal(){
+        System.out.println(Price20000.getText());
     }
 
     public void displayTotal() {
@@ -64,15 +77,12 @@ public class HomePage extends BasePage {
     }
     public void clickCheckout(){
         Checkout.click();
+        frameSwitchTo(0);
+        Utils.holdExecutionForSeconds(3);
 
     }
     public boolean verifyCheckout() {
-        boolean flag;
-        if (Checkout.isDisplayed()) {
-            flag = true;
-        } else {
-            flag = false;
-        }
+        boolean flag = wait(Checkout).isDisplayed();
         return flag;
     }
 
@@ -83,10 +93,18 @@ public class HomePage extends BasePage {
             System.out.println(detail.getText());
 
         }
-    /*public void frame(){
-            Int size = driver.findElements(By.tagName("iframe")).size();
-
-        } */
+    }
+    public void enterDetails(){
+        //clickBuyNow();
+        wait(Checkout);
+        enterText(Name,"Vinisha");
+        Utils.holdExecutionForSeconds(2);
+        enterText(Email,"vinisha@abc.com");
+        enterText(phone,"9993737773");
+        enterText(city,"Delhi");
+        enterText(address,"Street 4443");
+        enterText(Postalcode,"201303");
+        wait(Checkout);
     }
 }
 

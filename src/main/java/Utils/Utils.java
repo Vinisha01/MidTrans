@@ -3,21 +3,24 @@ package Utils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
 
 import java.io.FileInputStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.function.Function;
 
 public class Utils<properties> extends SetUp{
 
 
-        public boolean isDisplayedElement(String xpath) {
+        public boolean isDisplayedElement(WebElement xpath) {
             boolean flag = false;
             try {
-                WebElement element = driver.findElement(By.xpath(xpath));
+                WebElement element = driver.findElement(By.xpath(String.valueOf(xpath)));
                 if (element.isDisplayed()) {
                     flag = true;
                 }
@@ -39,13 +42,7 @@ public class Utils<properties> extends SetUp{
             return wait.until(ExpectedConditions.visibilityOf(element));
         }
 
-      /*  public void click(WebElement element) {
-            element.click();
-        }
 
-        public void EnterText(WebElement element, String text) {
-            element.sendKeys(text);
-        }*/
 
         public static boolean areDisplayed(List<WebElement> elements) {
             boolean flag = false;
@@ -96,12 +93,18 @@ public class Utils<properties> extends SetUp{
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("window.scrollBy(0,1600)");
         }
-
-        public void hover(WebElement element) {
-            Actions actions = new Actions(driver);
-            actions.moveToElement(element);
-            actions.perform();
+    public void frameSwitchTo(int index)
+    {
+        holdExecutionForSeconds(5);
+        try {
+            driver.switchTo().frame(index);
+        }catch (NoSuchWindowException e)
+        {
+            driver.switchTo().window(driver.getWindowHandle());
+            driver.switchTo().frame(index);
         }
+    }
+
 
         public void enterTextUsingKeys(WebElement element, Keys key) {
             try {

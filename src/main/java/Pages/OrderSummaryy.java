@@ -1,9 +1,12 @@
 package Pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class OrderSummaryy extends BasePage{
@@ -20,9 +23,29 @@ public class OrderSummaryy extends BasePage{
     WebElement ProductName;
     @FindBy(xpath = "//td[contains(.,'20,000')]")
     WebElement ProductPrice;
+    @FindBy(xpath = "//a[@class='button-main-content']")
+    WebElement Continue;
+    @FindBy(xpath = "//h1[normalize-space()='COCO STORE']")
+    WebElement CocoStoreLabel;
+    @FindBy(xpath = "//p[contains(text(),'Select Payment')]")
+    WebElement SelectPayment;
+    @FindBy(xpath = "//*[@id='container']/div/div/div[1]/div[3]")
+    WebElement Overlay;
 
     public void verifyProductName(){
         Assert.assertEquals(ProductName.getText(),"MidTrans Pillow");
+    }
+    public void clickOnContinue(){
+        WebDriverWait wait1= new WebDriverWait(driver,20);
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='button-main-content']")));
+        Continue.click();
+    }
+    public void verifySelectPayment(){
+        Assert.assertEquals(SelectPayment.getText(),"Select Payment");
+    }
+    public void waitForInvisibilityofOverlay(){
+        WebDriverWait wait= new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='container']/div/div/div[1]/div[3]")));
     }
 
 
