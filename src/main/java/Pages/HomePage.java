@@ -77,9 +77,8 @@ public class HomePage extends BasePage {
     }
     public void clickCheckout(){
         Checkout.click();
-        frameSwitchTo(0);
         Utils.holdExecutionForSeconds(3);
-
+        frameSwitchTo(0);
     }
     public boolean verifyCheckout() {
         boolean flag = wait(Checkout).isDisplayed();
@@ -95,7 +94,6 @@ public class HomePage extends BasePage {
         }
     }
     public void enterDetails(){
-        //clickBuyNow();
         wait(Checkout);
         enterText(Name,"Vinisha");
         Utils.holdExecutionForSeconds(2);
@@ -104,7 +102,6 @@ public class HomePage extends BasePage {
         enterText(city,"Delhi");
         enterText(address,"Street 4443");
         enterText(Postalcode,"201303");
-        wait(Checkout);
     }
 }
 

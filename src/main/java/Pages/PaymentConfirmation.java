@@ -47,6 +47,12 @@ public class PaymentConfirmation extends BasePage {
         OTP.clear();
         enterText(OTP,"112233");
     }
+    public void enterInvalidOTP(){
+        WebDriverWait wait1= new WebDriverWait(driver,10);
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div/input[@id='PaRes']")));
+        OTP.clear();
+        enterText(OTP,"8838388");
+    }
     public void clickOK(){
         OK.click();
     }

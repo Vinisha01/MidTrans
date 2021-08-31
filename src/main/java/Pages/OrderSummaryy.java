@@ -32,24 +32,27 @@ public class OrderSummaryy extends BasePage{
     @FindBy(xpath = "//*[@id='container']/div/div/div[1]/div[3]")
     WebElement Overlay;
 
-    public void verifyProductName(){
-        Assert.assertEquals(ProductName.getText(),"MidTrans Pillow");
+    public boolean verifyProductName(){
+        boolean flag= wait(ProductName).isDisplayed();
+        return flag;
+
     }
     public void clickOnContinue(){
         WebDriverWait wait1= new WebDriverWait(driver,20);
         wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='button-main-content']")));
         Continue.click();
+        frameSwitchTo(0);
     }
-    public void verifySelectPayment(){
-        Assert.assertEquals(SelectPayment.getText(),"Select Payment");
+    public boolean verifySelectPayment(){
+       boolean flag= wait(SelectPayment).isDisplayed();
+       return  flag;
     }
-    public void waitForInvisibilityofOverlay(){
-        WebDriverWait wait= new WebDriverWait(driver,10);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='container']/div/div/div[1]/div[3]")));
+    public boolean verifyPageLabel(){
+        boolean flag= wait(CocoStoreLabel).isDisplayed();
+        return flag;
     }
-
-
-
-
-
+    public boolean verifyProductPrice(){
+        boolean flag= wait(ProductPrice).isDisplayed();
+        return flag;
+    }
 }

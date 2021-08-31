@@ -57,10 +57,6 @@ public class Utils<properties> extends SetUp{
             return flag;
         }
 
-        public void handleDropdownOfSelectTagUsingValue(WebElement element, String value) {
-            Select select = new Select(element);
-            select.selectByValue(value);
-        }
 
         public void enterTextForListOfWebElements(List<WebElement> elements, List<String> details) {
             for (int i = 0; i < details.size(); i++) {
@@ -104,6 +100,7 @@ public class Utils<properties> extends SetUp{
             driver.switchTo().frame(index);
         }
     }
+
 
 
         public void enterTextUsingKeys(WebElement element, Keys key) {

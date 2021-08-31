@@ -66,39 +66,45 @@ public class Test<properties> {
     }
     @org.testng.annotations.Test(priority = 5, groups = {"Regression", "Smoke"})
      public void redirectToOrderSummary(){
-
-    }
-
-    @org.testng.annotations.Test (priority = 6)
-    public void continuePayment(){
         fillDetails();
         homePage.clickCheckout();
-        orderSummaryy.clickOnContinue();
+        Assert.assertTrue(orderSummaryy.verifyPageLabel());
 
     }
-    @org.testng.annotations.Test (priority = 7)
+
+    @org.testng.annotations.Test (priority = 6, groups = {"Regression"})
+    public void continuePayment(){
+        redirectToOrderSummary();
+        Assert.assertTrue(orderSummaryy.verifyProductName());
+        Assert.assertTrue(orderSummaryy.verifyProductPrice());
+    }
+
+    @org.testng.annotations.Test (priority = 7, groups = {"Regression", "Smoke"})
     public void selectPayment(){
         homePage.clickBuyNow();
         Utils.holdExecutionForSeconds(3);
         homePage.enterDetails();
         homePage.clickCheckout();
-        driver.switchTo().frame(0);
         Utils.holdExecutionForSeconds(3);
         orderSummaryy.clickOnContinue();
-        orderSummaryy.verifySelectPayment();
+        Assert.assertTrue(orderSummaryy.verifySelectPayment());
     }
-    @org.testng.annotations.Test(priority = 8)
+
+    @org.testng.annotations.Test(priority = 8, groups = {"Regression"})
     public void getCardDetails(){
         selectPayment();
         paymentPage.getCard();
     }
-    @org.testng.annotations.Test(priority = 9)
+    @org.testng.annotations.Test(priority = 9, groups = {"Regression","Smoke"})
     public void clickCredit(){
-        selectPayment();
+        //selectPayment();
+        homePage.clickBuyNow();
+        homePage.clickCheckout();
+        orderSummaryy.clickOnContinue();
         paymentPage.clickCreditCard();
 
     }
-    @org.testng.annotations.Test(priority = 10)
+    @org.testng.annotations.Test(priority = 10, groups = {"Regression"})
     public void verifyOrdAmount(){
         clickCredit();
         paymentPage.verifyAmount();
@@ -106,24 +112,30 @@ public class Test<properties> {
         paymentPage.selectCheckbox();
         paymentPage.getNewPrice();
     }
-    @org.testng.annotations.Test(priority = 11)
+    @org.testng.annotations.Test(priority = 11, groups = {"Regression","Smoke"})
     public void clickOnPayNow(){
         clickCredit();
         paymentPage.selectCheckbox();
         paymentPage.EnterCardDetails();
         paymentPage.PayNow();
     }
-    @org.testng.annotations.Test(priority = 12)
+    @org.testng.annotations.Test(priority = 12, groups = {"Regression"})
     public void verifyPaymentDetail(){
         clickOnPayNow();
         Utils.holdExecutionForSeconds(2);
         paymentConfirmation.getPaymentDetails();
 
     }
-    @org.testng.annotations.Test(priority = 13)
+    @org.testng.annotations.Test(priority = 13, groups = {"Regression", "Smoke"})
     public void enterOTP(){
         clickOnPayNow();
         paymentConfirmation.enterOTP();
+        paymentConfirmation.clickOK();
+    }
+    @org.testng.annotations.Test(priority = 14)
+    public void enterInvalidOTP(){
+        clickOnPayNow();
+        paymentConfirmation.enterInvalidOTP();
         paymentConfirmation.clickOK();
     }
     @org.testng.annotations.Test(priority = 15)
