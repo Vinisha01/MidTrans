@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="REGRESSION-TEST">
-    <test thread-count="1" name="test" parallel="false">
+<suite name="Default Suite">
+    <test verbose="2" preserve-order="true" name="MidTrans">
         <groups>
             <run>
-                <include name="Req"/>
-                <include name="Regression"/>
+                <include name="Regression"></include>
             </run>
         </groups>
-
         <classes>
-            <class name="TestCases.Test"/>
+            <class name="TestCases.Test"></class>
         </classes>
     </test>
 </suite>

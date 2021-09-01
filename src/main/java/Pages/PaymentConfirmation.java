@@ -56,7 +56,9 @@ public class PaymentConfirmation extends BasePage {
         enterText(OTP,"8838388");
     }
     public void clickOK(){
+
         OK.click();
+        frameSwitchTo(0);
     }
     public void cancelButton(){
         wait(Cancel);
