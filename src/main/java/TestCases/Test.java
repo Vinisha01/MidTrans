@@ -141,7 +141,7 @@ public class Test<properties> {
         Assert.assertTrue(homePage.verifyMessage());
     }
 
-    @org.testng.annotations.Test(priority = 14)
+    @org.testng.annotations.Test(priority = 14, groups = {"Regression"})
     public void enterInvalidOTP() {
         clickOnPayNow();
         paymentConfirmation.enterInvalidOTP();
@@ -149,7 +149,7 @@ public class Test<properties> {
         Assert.assertTrue(paymentConfirmation.verifyFailureMessage());
     }
 
-    @org.testng.annotations.Test(priority = 15)
+    @org.testng.annotations.Test(priority = 15, groups = {"Regression"})
     public void clickCancelButton() {
         clickOnPayNow();
         paymentConfirmation.cancelButton();

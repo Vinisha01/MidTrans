@@ -41,8 +41,7 @@ public class OrderSummaryy extends BasePage{
        WebDriverWait wait1= new WebDriverWait(driver,20);
         wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='button-main-content']")));
         Continue.click();
-        //frameSwitchTo(0);
-        //driver.switchTo().frame("snap-midtrans");
+
     }
     public boolean verifySelectPayment(){
        boolean flag= wait(SelectPayment).isDisplayed();

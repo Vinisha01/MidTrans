@@ -57,12 +57,6 @@ public class Utils<properties> extends SetUp {
     }
 
 
-    public void enterTextForListOfWebElements(List<WebElement> elements, List<String> details) {
-        for (int i = 0; i < details.size(); i++) {
-            enterText(elements.get(i), details.get(i));
-        }
-    }
-
     public void enterText(WebElement element, String text) {
         try {
             wait(element).clear();
@@ -84,10 +78,6 @@ public class Utils<properties> extends SetUp {
         js.executeScript("arguments[0].scrollIntoView(false)", element);
     }
 
-    public void scrollDown() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,1600)");
-    }
 
     public void frameSwitchTo(int index) {
         holdExecutionForSeconds(5);
