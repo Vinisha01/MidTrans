@@ -44,6 +44,8 @@ public class HomePage extends BasePage {
     WebElement address;
     @FindBy(xpath = "//input[@value='10220']")
     WebElement Postalcode;
+    @FindBy(xpath = "//span[normalize-space()='Thank you for your purchase.']")
+    WebElement SuccessfulMessage;
 
     public boolean verifyPrice() {
         boolean flag = false;
@@ -75,11 +77,13 @@ public class HomePage extends BasePage {
         Utils.holdExecutionForSeconds(3);
 
     }
-    public void clickCheckout(){
+    public void clickCheckout() {
         Checkout.click();
         Utils.holdExecutionForSeconds(3);
         frameSwitchTo(0);
+        //driver.switchTo().frame("snap-midtrans");
     }
+
     public boolean verifyCheckout() {
         boolean flag = wait(Checkout).isDisplayed();
         return flag;
@@ -102,6 +106,10 @@ public class HomePage extends BasePage {
         enterText(city,"Delhi");
         enterText(address,"Street 4443");
         enterText(Postalcode,"201303");
+    }
+    public boolean verifyMessage(){
+        boolean flag= wait(SuccessfulMessage).isDisplayed();
+        return flag;
     }
 }
 

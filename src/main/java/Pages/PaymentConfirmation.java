@@ -31,6 +31,8 @@ public class PaymentConfirmation extends BasePage {
     WebElement OK;
     @FindBy(xpath = "//button[normalize-space()='Cancel']")
     WebElement Cancel;
+    @FindBy(xpath = "//span[normalize-space()='Transaction failed']")
+    WebElement TransactionFailed;
 
     public void getPaymentDetails(){
         List <WebElement> details = PaymentDetails;
@@ -60,5 +62,9 @@ public class PaymentConfirmation extends BasePage {
         wait(Cancel);
         Cancel.click();
         frameSwitchTo(0);
+    }
+    public boolean verifyFailureMessage(){
+        boolean flag= wait(TransactionFailed).isDisplayed();
+        return flag;
     }
 }
